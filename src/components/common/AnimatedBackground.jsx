@@ -22,21 +22,21 @@ export function AnimatedBackground() {
 
       {/* Primary Cyan/Blue Bloom (Drifting upper left) */}
       <div
-        className={`absolute -top-[15%] -left-[10%] h-[550px] w-[550px] rounded-full bg-gradient-to-br from-blue-600/15 via-cyan-500/10 to-transparent blur-[120px] transform-gpu ${
+        className={`absolute -top-[15%] -left-[10%] h-[550px] w-[550px] rounded-full bg-gradient-to-br from-blue-600/15 via-cyan-500/10 to-transparent blur-[80px] transform-gpu ${
           shouldReduceMotion ? '' : 'animate-bloom-1'
         }`}
       />
 
       {/* Secondary Emerald/Teal Bloom (Drifting upper right) */}
       <div
-        className={`absolute top-[20%] -right-[15%] h-[600px] w-[600px] rounded-full bg-gradient-to-bl from-emerald-500/10 via-cyan-600/10 to-transparent blur-[140px] transform-gpu ${
+        className={`absolute top-[20%] -right-[15%] h-[600px] w-[600px] rounded-full bg-gradient-to-bl from-emerald-500/10 via-cyan-600/10 to-transparent blur-[90px] transform-gpu ${
           shouldReduceMotion ? '' : 'animate-bloom-2'
         }`}
       />
 
       {/* Center Ambient Subtle Glow */}
       <div
-        className={`absolute top-[45%] left-[25%] h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-[150px] transform-gpu ${
+        className={`absolute top-[45%] left-[25%] h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-[100px] transform-gpu ${
           shouldReduceMotion ? '' : 'animate-bloom-center'
         }`}
       />

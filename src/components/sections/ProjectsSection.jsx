@@ -332,7 +332,7 @@ export function ProjectsSection() {
 
   return (
     <section id="projects" className="py-24 relative overflow-hidden">
-      <div className="absolute top-1/2 -left-40 w-80 h-80 bg-blue-600/10 blur-[140px] rounded-full pointer-events-none transform-gpu" style={{ contain: "paint" }} />
+      <div className="absolute top-1/2 -left-40 w-80 h-80 bg-blue-600/10 blur-[70px] rounded-full pointer-events-none transform-gpu" style={{ contain: "paint" }} />
 
       <Container size="xl">
         <SectionTitle

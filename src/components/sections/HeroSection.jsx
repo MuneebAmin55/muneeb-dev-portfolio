@@ -52,9 +52,9 @@ export function HeroSection() {
     <section id="hero" className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden min-h-screen flex items-center">
       {/* Ambient background glows */}
       <div className="absolute inset-0 pointer-events-none -z-10" style={{ contain: "paint", isolation: "isolate" }}>
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 w-[700px] h-[400px] bg-gradient-to-tr from-blue-600/20 via-cyan-500/15 to-transparent blur-[130px] rounded-full transform-gpu" />
-        <div className="absolute bottom-24 left-1/4 w-[350px] h-[350px] bg-emerald-500/10 blur-[120px] rounded-full transform-gpu" />
-        <div className="absolute top-20 right-10 w-[280px] h-[280px] bg-indigo-600/10 blur-[100px] rounded-full transform-gpu" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 w-[700px] h-[400px] bg-gradient-to-tr from-blue-600/20 via-cyan-500/15 to-transparent blur-[70px] rounded-full transform-gpu" />
+        <div className="absolute bottom-24 left-1/4 w-[350px] h-[350px] bg-emerald-500/10 blur-[60px] rounded-full transform-gpu" />
+        <div className="absolute top-20 right-10 w-[280px] h-[280px] bg-indigo-600/10 blur-[50px] rounded-full transform-gpu" />
         {/* Fine grid */}
         <div className="absolute inset-0 bg-grid-subtle [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_65%,transparent_100%)]" />
       </div>

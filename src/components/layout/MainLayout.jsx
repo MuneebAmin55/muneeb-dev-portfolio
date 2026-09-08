@@ -1,7 +1,8 @@
-import React from 'react';
+﻿import React from 'react';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { SmoothScroll } from './SmoothScroll';
 import { ScrollProgress } from '@/components/feedback/ScrollProgress';
 import { BackToTop } from '@/components/feedback/BackToTop';
 import { LoadingScreen } from '@/components/feedback/LoadingScreen';
@@ -11,21 +12,23 @@ import { CustomCursor } from '@/components/common/CustomCursor';
 
 export function MainLayout() {
   return (
-    <div className="relative min-h-screen flex flex-col bg-[#020617] text-foreground selection:bg-blue-500/25 selection:text-cyan-400">
-      <LoadingScreen />
-      <CustomCursor />
-      <AnimatedBackground />
-      <FloatingShapes />
-      <ScrollProgress />
-      <Navbar />
+    <SmoothScroll>
+      <div className="relative min-h-screen flex flex-col bg-[#020617] text-foreground selection:bg-blue-500/25 selection:text-cyan-400 overflow-x-hidden">
+        <LoadingScreen />
+        <CustomCursor />
+        <AnimatedBackground />
+        <FloatingShapes />
+        <ScrollProgress />
+        <Navbar />
 
-      <div className="flex-grow">
-        <Outlet />
+        <div className="flex-grow">
+          <Outlet />
+        </div>
+
+        <Footer />
+        <BackToTop />
+        <ScrollRestoration />
       </div>
-
-      <Footer />
-      <BackToTop />
-      <ScrollRestoration />
-    </div>
+    </SmoothScroll>
   );
 }

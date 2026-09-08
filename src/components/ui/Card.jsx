@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { cn } from '@/utils/cn';
 
 export const Card = React.forwardRef(
@@ -6,7 +6,7 @@ export const Card = React.forwardRef(
     <div
       ref={ref}
       className={cn(
-        'rounded-2xl border bg-card text-card-foreground shadow-sm transition-all duration-300',
+        'rounded-2xl border text-card-foreground shadow-sm transition-[transform,border-color,box-shadow] duration-200',
         glass && 'glass-card',
         hover &&
           'hover:shadow-xl hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-primary/5',

@@ -29,27 +29,34 @@ export function Footer() {
   const navigate = useNavigate();
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { duration: 1.1 });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const scrollToAnchor = (e, href) => {
     e.preventDefault();
 
+    const scrollTarget = (el) => {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(el, { offset: -80, duration: 1.1 });
+      } else {
+        const topOffset = el.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: topOffset, behavior: 'smooth' });
+      }
+    };
+
     if (location.pathname !== '/') {
       navigate('/' + href);
       setTimeout(() => {
         const targetEl = document.querySelector(href);
-        if (targetEl) {
-          const topOffset = targetEl.getBoundingClientRect().top + window.pageYOffset - 80;
-          window.scrollTo({ top: topOffset, behavior: 'smooth' });
-        }
+        if (targetEl) scrollTarget(targetEl);
       }, 150);
     } else {
       const el = document.querySelector(href);
-      if (el) {
-        const topOffset = el.getBoundingClientRect().top + window.pageYOffset - 80;
-        window.scrollTo({ top: topOffset, behavior: 'smooth' });
-      }
+      if (el) scrollTarget(el);
     }
   };
 
