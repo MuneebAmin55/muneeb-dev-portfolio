@@ -1,4 +1,4 @@
-﻿import React, { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import {
   ArrowRight,
@@ -23,7 +23,7 @@ const scrollTo = (id) => {
 
 export function HeroSection() {
 
-  /* Parallax tilt for the terminal card */
+  /* Parallax tilt for the terminal card (only on fine pointer / desktop devices) */
   const cardRef = useRef(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -32,9 +32,11 @@ export function HeroSection() {
 
   const boundsRef = useRef(null);
   const handleMouseEnter = (e) => {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     boundsRef.current = e.currentTarget.getBoundingClientRect();
   };
   const handleMouseMove = (e) => {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     if (!boundsRef.current) {
       boundsRef.current = e.currentTarget.getBoundingClientRect();
     }
@@ -50,11 +52,11 @@ export function HeroSection() {
 
   return (
     <section id="hero" className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden min-h-screen flex items-center">
-      {/* Ambient background glows */}
+      {/* Ambient background glows with responsive blur for mobile GPU speed */}
       <div className="absolute inset-0 pointer-events-none -z-10" style={{ contain: "paint", isolation: "isolate" }}>
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 w-[700px] h-[400px] bg-gradient-to-tr from-blue-600/20 via-cyan-500/15 to-transparent blur-[70px] rounded-full transform-gpu" />
-        <div className="absolute bottom-24 left-1/4 w-[350px] h-[350px] bg-emerald-500/10 blur-[60px] rounded-full transform-gpu" />
-        <div className="absolute top-20 right-10 w-[280px] h-[280px] bg-indigo-600/10 blur-[50px] rounded-full transform-gpu" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 w-[350px] sm:w-[700px] h-[250px] sm:h-[400px] bg-gradient-to-tr from-blue-600/20 via-cyan-500/15 to-transparent blur-[35px] sm:blur-[70px] rounded-full transform-gpu" />
+        <div className="absolute bottom-24 left-1/4 w-[220px] sm:w-[350px] h-[220px] sm:h-[350px] bg-emerald-500/10 blur-[30px] sm:blur-[60px] rounded-full transform-gpu" />
+        <div className="absolute top-20 right-10 w-[180px] sm:w-[280px] h-[180px] sm:h-[280px] bg-indigo-600/10 blur-[30px] sm:blur-[50px] rounded-full transform-gpu" />
         {/* Fine grid */}
         <div className="absolute inset-0 bg-grid-subtle [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_65%,transparent_100%)]" />
       </div>
@@ -226,38 +228,43 @@ export function HeroSection() {
             transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
             className="relative flex-shrink-0 w-72 h-72 sm:w-80 sm:h-80 lg:w-[360px] lg:h-[360px] xl:w-[400px] xl:h-[400px]"
           >
-            {/* Outer animated gradient ring */}
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-tr from-blue-500 via-cyan-400 to-emerald-400"
+            {/* Outer animated gradient ring (Compositor-thread GPU animation) */}
+            <div
+              className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-tr from-blue-500 via-cyan-400 to-emerald-400 animate-spin-slow transform-gpu"
               style={{ borderRadius: "9999px" }}
             >
               <div className="w-full h-full rounded-full bg-[#020617]" />
-            </motion.div>
+            </div>
 
             {/* Static secondary ring */}
             <div className="absolute inset-[6px] rounded-full border border-white/10" />
 
             {/* Glow pulse behind */}
             <motion.div
-              animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.55, 0.3] }}
+              animate={{ scale: [1, 1.08, 1], opacity: [0.3, 0.5, 0.3] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-0 rounded-full bg-blue-500/20 blur-3xl -z-10"
+              className="absolute inset-0 rounded-full bg-blue-500/20 blur-2xl -z-10"
             />
 
             {/* Floating oscillation wrapper */}
             <motion.div
-              animate={{ y: [0, -14, 0] }}
+              animate={{ y: [0, -12, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="absolute inset-[4px] rounded-full overflow-hidden shadow-[0_24px_60px_rgba(59,130,246,0.35)]"
             >
-              <img
-                src="/images/muneeb-amin.jpg"
-                alt="Muneeb Amin — Full Stack Developer"
-                className="w-full h-full object-cover object-top rounded-full"
-                loading="eager"
-              />
+              <picture>
+                <source srcSet="/images/muneeb-amin.webp" type="image/webp" />
+                <img
+                  src="/images/muneeb-amin.jpg"
+                  alt="Muneeb Amin — Full Stack Developer"
+                  className="w-full h-full object-cover object-top rounded-full"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  width="400"
+                  height="400"
+                />
+              </picture>
               {/* Subtle glass overlay at bottom */}
               <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#020617]/60 via-transparent to-transparent" />
             </motion.div>

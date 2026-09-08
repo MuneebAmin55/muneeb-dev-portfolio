@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 
 /**
@@ -8,18 +8,28 @@ import Lenis from 'lenis';
  */
 export function SmoothScroll({ children }) {
   useEffect(() => {
-    // Disable on devices requesting reduced motion or touch screens if desired
+    // Disable on devices requesting reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
+    // Mobile touch devices (iOS / Android) have native hardware-accelerated 60-120 FPS
+    // inertial scrolling on the compositor thread. Intercepting touch events with Lenis
+    // on mobile causes input delay, scroll stutter, and frame drops.
+    const isTouchDevice =
+      window.matchMedia('(pointer: coarse)').matches ||
+      !window.matchMedia('(pointer: fine)').matches;
+
+    if (isTouchDevice) {
+      return;
+    }
+
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth exponential deceleration
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.2,
+      syncTouch: false,
       infinite: false,
     });
 

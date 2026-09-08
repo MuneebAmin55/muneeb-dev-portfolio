@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useReducedMotion } from 'framer-motion';
 
 /**
@@ -12,7 +12,7 @@ export function FloatingShapes() {
 
   return (
     <div
-      className="fixed inset-0 pointer-events-none overflow-hidden select-none -z-5"
+      className="fixed inset-0 pointer-events-none overflow-hidden select-none -z-5 hidden sm:block"
       style={{ contain: 'strict', isolation: 'isolate' }}
     >
       {/* Upper Right Frosted Ring */}

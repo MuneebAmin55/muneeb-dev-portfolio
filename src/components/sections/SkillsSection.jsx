@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Code, Server, Database, Shield, Cloud, Wrench, CheckCircle2 } from 'lucide-react';
 import { Container } from '@/components/common/Container';
@@ -70,14 +70,10 @@ export function SkillsSection() {
         </div>
 
         {/* Skills Cards Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <AnimatePresence mode="popLayout">
             {displayedSkills.map((skill, index) => (
               <motion.div
-                layout
                 key={skill.name}
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -123,7 +119,7 @@ export function SkillsSection() {
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </Container>
     </section>
   );

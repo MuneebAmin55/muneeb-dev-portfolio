@@ -153,22 +153,11 @@ export function GitHubSection() {
             {/* Simulated Interactive Contribution Heatmap */}
             <div className="relative overflow-x-auto pb-4">
               <div className="flex gap-1.5 min-w-[700px]">
-                {Array.from({ length: weeks }).map((_, weekIdx) => (
+                {gridData.map((week, weekIdx) => (
                   <div key={weekIdx} className="flex flex-col gap-1.5">
-                    {Array.from({ length: daysPerWeek }).map((_, dayIdx) => {
-                      const seed = (weekIdx * 7 + dayIdx * 3) % 17;
-                      const intensity = seed % 5;
-                      const count = intensity * 3 + (seed % 2);
+                    {week.map(({ dayIdx, count, intensity }) => {
                       const isHovered =
                         hoveredCell?.week === weekIdx && hoveredCell?.day === dayIdx;
-
-                      const colors = [
-                        'bg-slate-800/40 border border-white/[0.03]',
-                        'bg-emerald-950/60 border border-emerald-900/30',
-                        'bg-emerald-800/70 border border-emerald-700/40',
-                        'bg-emerald-600 border border-emerald-500/40',
-                        'bg-emerald-400 border border-emerald-300/40',
-                      ];
 
                       return (
                         <div
@@ -177,7 +166,7 @@ export function GitHubSection() {
                             setHoveredCell({ week: weekIdx, day: dayIdx, count })
                           }
                           onMouseLeave={() => setHoveredCell(null)}
-                          className={`h-3.5 w-3.5 rounded-sm ${colors[intensity]} transition-all duration-150 cursor-pointer ${
+                          className={`h-3.5 w-3.5 rounded-sm ${HEATMAP_COLORS[intensity]} transition-all duration-150 cursor-pointer ${
                             isHovered ? 'scale-150 z-20 ring-2 ring-white shadow-glow-accent' : 'hover:scale-125'
                           }`}
                         />

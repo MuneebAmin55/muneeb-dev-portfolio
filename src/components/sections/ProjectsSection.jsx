@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CheckCircle2,
@@ -98,7 +98,7 @@ function ProjectModal({ project, onClose }) {
 }
 
 /* Featured (Large) Project Card */
-function FeaturedProjectCard({ project, onView }) {
+const FeaturedProjectCard = React.memo(function FeaturedProjectCard({ project, onView }) {
   return (
     <motion.div
       variants={slideUp}
@@ -112,15 +112,16 @@ function FeaturedProjectCard({ project, onView }) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
         {/* Screenshot */}
         <div className="relative overflow-hidden h-72 lg:h-auto min-h-[320px]">
-          <motion.img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover object-top"
-            whileHover={{ scale: 1.04 }}
-            transition={{ duration: 0.5 }}
-            loading="lazy"
-            decoding="async"
-          />
+          <picture>
+            <source srcSet={project.image.replace(/\.(png|jpg)$/, '.webp')} type="image/webp" />
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
           <div className="absolute inset-0 lg:bg-gradient-to-r from-transparent via-transparent to-[#0F172A]/90" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/60 to-transparent lg:hidden" />
 
@@ -200,13 +201,12 @@ function FeaturedProjectCard({ project, onView }) {
       </div>
     </motion.div>
   );
-}
+});
 
 /* Standard Project Card */
-function ProjectCard({ project, index, onView }) {
+const ProjectCard = React.memo(function ProjectCard({ project, index, onView }) {
   return (
     <motion.div
-      layout
       variants={slideUp}
       initial="hidden"
       whileInView="visible"
@@ -220,15 +220,16 @@ function ProjectCard({ project, index, onView }) {
 
       {/* Screenshot container */}
       <div className="relative overflow-hidden h-52 sm:h-56 flex-shrink-0 bg-slate-950">
-        <motion.img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover object-top"
-          whileHover={{ scale: 1.06 }}
-          transition={{ duration: 0.5 }}
-          loading="lazy"
-          decoding="async"
-        />
+        <picture>
+          <source srcSet={project.image.replace(/\.(png|jpg)$/, '.webp')} type="image/webp" />
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent" />
 
         {/* Badges */}
@@ -303,7 +304,7 @@ function ProjectCard({ project, index, onView }) {
       </div>
     </motion.div>
   );
-}
+});
 
 /* Main Section */
 export function ProjectsSection() {
@@ -389,11 +390,11 @@ export function ProjectsSection() {
         {/* Standard Project Cards Grid */}
         <AnimatePresence mode="popLayout">
           {filteredOthers.length > 0 ? (
-            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {filteredOthers.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} onView={setViewProject} />
               ))}
-            </motion.div>
+            </div>
           ) : (
             <motion.div
               initial={{ opacity: 0 }}

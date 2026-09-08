@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import {
   Layout,
@@ -67,7 +67,7 @@ export function AboutSection() {
   return (
     <section id="about" className="py-24 relative overflow-hidden">
       {/* Ambient background */}
-      <div className="absolute top-1/3 right-0 w-96 h-96 bg-cyan-500/10 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-80 sm:w-96 h-80 sm:h-96 bg-cyan-500/10 blur-[40px] sm:blur-[80px] rounded-full pointer-events-none transform-gpu" style={{ contain: "paint" }} />
 
       <Container size="xl">
         <SectionTitle
@@ -94,20 +94,20 @@ export function AboutSection() {
               </div>
 
               {/* Glass shimmer frame */}
-              <motion.div
-                whileHover={{ scale: 1.02, boxShadow: "0 20px 50px rgba(59,130,246,0.3)" }}
-                transition={{ duration: 0.3 }}
-                className="absolute inset-[3px] rounded-[13px] overflow-hidden border border-white/10"
-              >
-                <img
-                  src="/images/muneeb-amin.jpg"
-                  alt="Muneeb Amin"
-                  className="w-full h-full object-cover object-top"
-                  loading="lazy"
-                />
+              <div className="absolute inset-[3px] rounded-[13px] overflow-hidden border border-white/10 group">
+                <picture>
+                  <source srcSet="/images/muneeb-amin.webp" type="image/webp" />
+                  <img
+                    src="/images/muneeb-amin.jpg"
+                    alt="Muneeb Amin"
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
                 {/* Subtle bottom glass overlay */}
                 <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0F172A]/70 to-transparent" />
-              </motion.div>
+              </div>
 
               {/* Open to work badge */}
               <div className="absolute -bottom-4 -right-4 flex items-center gap-2 px-3 py-1.5 rounded-xl border border-emerald-500/30 bg-[#0F172A]/95 backdrop-blur-xl shadow-soft-md">

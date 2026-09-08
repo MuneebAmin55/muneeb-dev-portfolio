@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/utils/cn";
 
@@ -21,7 +21,7 @@ const techBadges = [
  * Floating Tech Icons / Badges - ambient decorative elements with Framer Motion.
  * Pauses oscillation if prefers-reduced-motion is active.
  */
-export function FloatingTechIcons({ className = "" }) {
+export const FloatingTechIcons = React.memo(function FloatingTechIcons({ className = "" }) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
@@ -39,13 +39,13 @@ export function FloatingTechIcons({ className = "" }) {
             shouldReduceMotion
               ? { opacity: 0.6, y: 0, x: 0 }
               : {
-                  opacity: [0, 0.7, 0.4, 0.75, 0.4],
-                  y: [0, -(14 + (i % 3) * 6), 0, -10, 0],
-                  x: [0, i % 2 === 0 ? 8 : -8, 0],
+                  opacity: [0.35, 0.75, 0.35],
+                  y: [0, -(12 + (i % 3) * 5), 0],
+                  x: [0, i % 2 === 0 ? 6 : -6, 0],
                 }
           }
           transition={{
-            duration: 7 + (i % 4) * 1.5,
+            duration: 6 + (i % 3) * 2,
             repeat: shouldReduceMotion ? 0 : Infinity,
             ease: "easeInOut",
             delay: badge.delay,
@@ -62,4 +62,4 @@ export function FloatingTechIcons({ className = "" }) {
       ))}
     </div>
   );
-}
+});
