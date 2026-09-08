@@ -9,11 +9,10 @@ export const personalData = {
   shortBio:
     'Full Stack Developer skilled in React.js, Redux Toolkit, Node.js, Express.js, Django REST Framework, PostgreSQL, and MySQL.',
   location: 'Available Globally / Remote',
-  email: 'ma2586422@example.com',
+  email: 'ma2586422@gmail.com',
   github: 'https://github.com/MuneebAmin55',
   linkedin: 'https://www.linkedin.com/in/muneebamin-dev/',
-
-  resumeUrl: '/resume.pdf',
+  resumeUrl: '#',
   yearsOfExperience: '1+',
   completedProjects: '5+',
   satisfiedClients: '2+',
