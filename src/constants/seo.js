@@ -1,0 +1,20 @@
+export const DEFAULT_SEO = {
+  title: 'Muneeb Amin | Full Stack Developer & Software Architect',
+  titleTemplate: '%s | Muneeb Amin',
+  description: 'Senior Full Stack Developer specializing in React, Node.js, modern web architecture, cloud systems, and high-performance UI engineering.',
+  keywords: [
+    'Muneeb Amin',
+    'Full Stack Developer',
+    'Software Engineer',
+    'React Developer',
+    'JavaScript Architect',
+    'Node.js Developer',
+    'Web Architecture',
+    'Tailwind CSS',
+    'Frontend Engineer',
+  ],
+  author: 'Muneeb Amin',
+  siteUrl: 'https://muneebamin.dev',
+  ogImage: '/og-image.png',
+  twitterHandle: '@muneebamin',
+};

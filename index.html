@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Muneeb Amin | Full Stack Developer</title>
+    <meta name="title" content="Muneeb Amin | Full Stack Developer" />
+    <meta name="description" content="Full Stack Developer experienced in building responsive and scalable web applications using React.js, Redux Toolkit, Django REST Framework, Node.js, Express.js, PostgreSQL, and MySQL." />
+    <meta name="keywords" content="Muneeb Amin, Full Stack Developer, React.js, Redux Toolkit, Node.js, Express.js, Django REST Framework, PostgreSQL, MySQL, Web Developer Portfolio" />
+    <meta name="author" content="Muneeb Amin" />
+    <meta name="theme-color" content="#020617" />
+    <link rel="canonical" href="https://muneebamin.dev/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://muneebamin.dev/" />
+    <meta property="og:title" content="Muneeb Amin | Full Stack Developer" />
+    <meta property="og:description" content="Building scalable, responsive, and high-performance web applications using modern technologies." />
+    <meta property="og:image" content="https://muneebamin.dev/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Muneeb Amin - Full Stack Developer Portfolio" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://muneebamin.dev/" />
+    <meta name="twitter:title" content="Muneeb Amin | Full Stack Developer" />
+    <meta name="twitter:description" content="Building scalable, responsive, and high-performance web applications using modern technologies." />
+    <meta name="twitter:image" content="https://muneebamin.dev/og-image.png" />
+
+    <!-- Inter & JetBrains Mono Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Schema.org Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Muneeb Amin",
+      "jobTitle": "Full Stack Developer",
+      "description": "Full Stack Developer experienced in building responsive and scalable web applications using React.js, Redux Toolkit, Django REST Framework, Node.js, Express.js, PostgreSQL, and MySQL.",
+      "url": "https://muneebamin.dev",
+      "sameAs": [
+        "https://github.com/muneebamin",
+        "https://linkedin.com/in/muneebamin",
+        "https://twitter.com/muneebamin"
+      ],
+      "knowsAbout": [
+        "React.js",
+        "Redux Toolkit",
+        "Node.js",
+        "Express.js",
+        "Django REST Framework",
+        "PostgreSQL",
+        "MySQL",
+        "Tailwind CSS",
+        "REST APIs"
+      ]
+    }
+    </script>
+
+    <!-- Prevent FOUC Theme Initializer -->
+    <script>
+      (function() {
+        try {
+          const storedTheme = localStorage.getItem('muneeb_portfolio_theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (storedTheme === 'dark' || (!storedTheme && prefersDark) || (storedTheme === 'system' && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          } else if (storedTheme === 'light') {
+            document.documentElement.classList.remove('dark');
+          } else {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen bg-background text-foreground antialiased font-sans selection:bg-primary/20 selection:text-primary overflow-x-hidden">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
