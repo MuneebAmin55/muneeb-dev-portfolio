@@ -1,10 +1,11 @@
-﻿import React from 'react';
+import React from 'react';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { SmoothScroll } from './SmoothScroll';
 import { ScrollProgress } from '@/components/feedback/ScrollProgress';
 import { BackToTop } from '@/components/feedback/BackToTop';
+import { WhatsAppButton } from '@/components/feedback/WhatsAppButton';
 import { LoadingScreen } from '@/components/feedback/LoadingScreen';
 import { AnimatedBackground } from '@/components/common/AnimatedBackground';
 import { FloatingShapes } from '@/components/common/FloatingShapes';
@@ -27,6 +28,7 @@ export function MainLayout() {
 
         <Footer />
         <BackToTop />
+        <WhatsAppButton />
         <ScrollRestoration />
       </div>
     </SmoothScroll>
