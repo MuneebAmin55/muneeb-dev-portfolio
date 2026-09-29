@@ -1,124 +1,109 @@
-import React, { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Code, Server, Database, Shield, Cloud, Wrench, CheckCircle2 } from 'lucide-react';
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Container } from '@/components/common/Container';
 import { SectionTitle } from '@/components/common/SectionTitle';
-import { Card } from '@/components/ui/Card';
-import { skillsData } from '@/data/skills';
+import { skillCategories } from '@/data/skills';
 import { cn } from '@/utils/cn';
 
-const categories = [
-  { key: 'all', label: 'All Skills', icon: null },
-  { key: 'frontend', label: 'Frontend', icon: Code },
-  { key: 'backend', label: 'Backend', icon: Server },
-  { key: 'database', label: 'Databases', icon: Database },
-  { key: 'authentication', label: 'Auth & Security', icon: Shield },
-  { key: 'apiAndDeployment', label: 'APIs & Cloud', icon: Cloud },
-  { key: 'tools', label: 'Tools', icon: Wrench },
-];
+const categoryDotColor = {
+  frontend: 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]',
+  backend: 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]',
+  databases: 'bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.5)]',
+  'tools-deployment': 'bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.5)]',
+};
+
+const categoryHoverBorder = {
+  frontend: 'hover:border-blue-500/40 dark:hover:border-blue-400/40',
+  backend: 'hover:border-emerald-500/40 dark:hover:border-emerald-400/40',
+  databases: 'hover:border-cyan-500/40 dark:hover:border-cyan-400/40',
+  'tools-deployment': 'hover:border-purple-500/40 dark:hover:border-purple-400/40',
+};
 
 export function SkillsSection() {
-  const [activeCategory, setActiveCategory] = useState('all');
-
-  const allSkills = useMemo(() => [
-    ...skillsData.frontend,
-    ...skillsData.backend,
-    ...skillsData.database,
-    ...skillsData.authentication,
-    ...skillsData.apiAndDeployment,
-    ...skillsData.tools,
-  ], []);
-
-  const displayedSkills = useMemo(
-    () => (activeCategory === 'all' ? allSkills : skillsData[activeCategory] || []),
-    [activeCategory, allSkills]
-  );
+  const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden bg-gradient-to-b from-transparent via-[#0F172A]/20 to-transparent">
+    <section
+      id="skills"
+      aria-label="Skills & Technologies"
+      className="py-20 sm:py-24 relative overflow-hidden bg-gradient-to-b from-transparent via-[#0F172A]/10 dark:via-[#0F172A]/30 to-transparent"
+    >
       <Container size="xl">
         <SectionTitle
-          badge="Technical Arsenal"
-          title="Core Engineering &"
-          highlight="Proficiencies"
-          subtitle="A comprehensive overview of full stack technologies, frameworks, and architecture tools utilized in production applications."
+          badge="Technical Stack"
+          title="Core Technologies &"
+          highlight="Skills"
+          subtitle="A clean overview of programming languages, frameworks, databases, and deployment tools I utilize across full stack projects."
         />
 
-        {/* Category Pill Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mt-12 mb-12">
-          {categories.map((cat) => {
-            const IconComponent = cat.icon;
-            const isActive = activeCategory === cat.key;
+        {/* 2x2 Grid on Desktop / Tablet, 1 Column on Mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mt-12 sm:mt-16">
+          {skillCategories.map((category, index) => {
+            const dotClass = categoryDotColor[category.id] || categoryDotColor.frontend;
+            const hoverBorder = categoryHoverBorder[category.id] || categoryHoverBorder.frontend;
 
             return (
-              <button
-                type="button"
-                key={cat.key}
-                onClick={() => setActiveCategory(cat.key)}
+              <motion.div
+                key={category.id}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+                whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{
+                  duration: 0.35,
+                  delay: index * 0.05,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                whileHover={shouldReduceMotion ? undefined : { y: -3 }}
                 className={cn(
-                  'inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium transition-all duration-200 cursor-pointer select-none',
-                  isActive
-                    ? 'bg-blue-600 text-white shadow-glow-primary border border-blue-400/40'
-                    : 'bg-[#0F172A]/70 text-slate-400 hover:text-white border border-white/10 hover:border-white/20'
+                  'group relative flex flex-col justify-start rounded-2xl p-6 sm:p-7',
+                  'bg-white/80 dark:bg-[#0F172A]/75 backdrop-blur-xl',
+                  'border border-slate-200/80 dark:border-white/10',
+                  'shadow-soft-sm dark:shadow-soft-md',
+                  'transition-all duration-300',
+                  hoverBorder
                 )}
               >
-                {IconComponent && <IconComponent className="h-3.5 w-3.5" />}
-                <span>{cat.label}</span>
-              </button>
+                {/* Category Header */}
+                <div className="flex items-center justify-between gap-3 mb-5 sm:mb-6">
+                  <div className="flex items-center gap-2.5">
+                    <span className={cn('h-2 w-2 rounded-full', dotClass)} aria-hidden="true" />
+                    <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                      {category.title}
+                    </h3>
+                  </div>
+                  <span className="text-[11px] font-mono font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-200/60 dark:border-white/10 select-none">
+                    {category.skills.length} Technologies
+                  </span>
+                </div>
+
+                {/* Technology Names Only (Text Badges / Pills) */}
+                <div
+                  role="list"
+                  aria-label={`${category.title} technologies`}
+                  className="grid grid-cols-2 sm:grid-cols-3 gap-2.5"
+                >
+                  {category.skills.map((skill) => (
+                    <div
+                      key={skill}
+                      role="listitem"
+                      tabIndex={0}
+                      className={cn(
+                        'flex items-center justify-center text-center px-3 py-2.5 rounded-xl',
+                        'text-xs sm:text-sm font-medium tracking-tight leading-snug',
+                        'bg-slate-100/75 hover:bg-white dark:bg-slate-900/60 dark:hover:bg-slate-800/90',
+                        'text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white',
+                        'border border-slate-200/70 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/20',
+                        'shadow-xs hover:shadow-sm transition-all duration-200 cursor-default select-none',
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 dark:focus-visible:ring-offset-slate-950'
+                      )}
+                    >
+                      {skill}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
             );
           })}
-        </div>
-
-        {/* Skills Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <AnimatePresence mode="popLayout">
-            {displayedSkills.map((skill, index) => (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.25, delay: Math.min(index * 0.02, 0.2) }}
-              >
-                <Card
-                  hover
-                  glass
-                  className="p-5 border-white/10 bg-[#0F172A]/70 backdrop-blur-xl relative group hover:border-cyan-500/40 transform-gpu"
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-blue-400 group-hover:bg-cyan-400 transition-colors" />
-                      <h4 className="text-sm font-semibold text-white tracking-tight">
-                        {skill.name}
-                      </h4>
-                    </div>
-                    <span className="text-xs font-mono text-cyan-400 font-medium">
-                      {skill.level}%
-                    </span>
-                  </div>
-
-                  {/* Animated Progress Bar (ScaleX GPU transform instead of layout-reflowing width) */}
-                  <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                    <motion.div
-                      style={{ width: `${skill.level}%` }}
-                      initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      viewport={{ once: true, amount: 0.1 }}
-                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.04 }}
-                      className="h-full origin-left bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 rounded-full transform-gpu"
-                    />
-                  </div>
-
-                  <div className="flex items-center justify-between mt-3 text-[11px] text-slate-400 font-mono">
-                    <span>{skill.category}</span>
-                    <span className="text-emerald-400 flex items-center gap-1">
-                      <CheckCircle2 className="h-3 w-3" /> Proficient
-                    </span>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </AnimatePresence>
         </div>
       </Container>
     </section>

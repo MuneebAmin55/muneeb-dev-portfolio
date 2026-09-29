@@ -1,33 +1,60 @@
-export const skillsData = {
-  frontend: [
-    { name: 'React.js', level: 95, category: 'Frontend' },
-    { name: 'Redux Toolkit', level: 92, category: 'Frontend' },
-    { name: 'JavaScript (ES6+)', level: 94, category: 'Frontend' },
-  ],
-  backend: [
-    { name: 'Node.js', level: 90, category: 'Backend' },
-    { name: 'Django', level: 88, category: 'Backend' },
-    { name: 'Django REST Framework', level: 90, category: 'Backend' },
-  ],
-  database: [
-    { name: 'PostgreSQL', level: 90, category: 'Database' },
-    { name: 'MySQL', level: 88, category: 'Database' },
-  ],
-  authentication: [
-    { name: 'JWT Authentication', level: 94, category: 'Authentication' },
-    { name: 'Google Authentication', level: 88, category: 'Authentication' },
 
-  ],
-  apiAndDeployment: [
-    { name: 'REST APIs', level: 95, category: 'API & Cloud' },
-    { name: 'Vercel', level: 90, category: 'API & Cloud' },
-    { name: 'Render', level: 88, category: 'API & Cloud' },
-    { name: 'Cloudinary', level: 88, category: 'API & Cloud' },
-  ],
-  tools: [
-    { name: 'GitHub', level: 92, category: 'Tools' },
-    { name: 'Postman', level: 90, category: 'Tools' },
-    { name: 'VS Code', level: 94, category: 'Tools' },
-    { name: 'Antigravity', level: 90, category: 'Tools' },
-  ],
-};
+/**
+ * Skills & Technologies Data Configuration
+ * Clean, text-only technology category layout.
+ * No arbitrary percentages, proficiency levels, or progress indicators.
+ */
+
+export const skillCategories = [
+  {
+    id: 'frontend',
+    title: 'Frontend Development',
+    skills: [
+      'HTML5',
+      'CSS3',
+      'JavaScript',
+      'React.js',
+      'Redux Toolkit',
+      'Tailwind CSS',
+      'Bootstrap',
+    ],
+  },
+  {
+    id: 'backend',
+    title: 'Backend Development',
+    skills: [
+      'Node.js',
+      'Express.js',
+      'Python',
+      'Django',
+      'Django REST Framework',
+      'REST APIs',
+      'JWT',
+    ],
+  },
+  {
+    id: 'databases',
+    title: 'Databases',
+    skills: [
+      'PostgreSQL',
+      'MySQL',
+      'Neon',
+    ],
+  },
+  {
+    id: 'tools-deployment',
+    title: 'Tools & Deployment',
+    skills: [
+      'Git',
+      'GitHub',
+      'VS Code',
+      'Postman',
+      'Vercel',
+      'Render',
+      'Cloudinary',
+    ],
+  },
+];
+
+export const skillsData = skillCategories;
+

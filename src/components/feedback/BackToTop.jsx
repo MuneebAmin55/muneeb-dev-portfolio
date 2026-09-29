@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
@@ -33,7 +33,7 @@ export function BackToTop() {
           exit={{ opacity: 0, scale: 0.5, y: 20 }}
           transition={{ duration: 0.2 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-background/80 backdrop-blur-md border border-border shadow-lg shadow-black/10 transition-all hover:scale-110 hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transform-gpu"
+          className="fixed bottom-20 right-6 sm:bottom-22 sm:right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-background/80 backdrop-blur-md border border-border shadow-lg shadow-black/10 transition-all hover:scale-110 hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transform-gpu"
           aria-label="Scroll back to top"
           title="Back to top"
         >
